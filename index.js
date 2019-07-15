@@ -44,6 +44,7 @@ app.get('/users', async (req, res) => {
 });
 
 app.post('/users', async (req, res) => {
+  // improve so we return newly created record instead of an array of ids
   const result = await createNewUser(req.body);
   res.json(result);
 });
