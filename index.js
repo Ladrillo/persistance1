@@ -12,6 +12,10 @@ const db = knex({
   useNullAsDefault: true,
 });
 
+function getAllUsers() {
+
+}
+
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
@@ -19,8 +23,9 @@ app.get('/', (req, res, next) => {
 });
 
 // 1-  ENDPOINT
-app.get('/users', (req, res) => {
+app.get('/users', async (req, res) => {
   // pull all users from db
+  const users = await getAllUsers();
   // send users back to client
 });
 
