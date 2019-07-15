@@ -1,4 +1,6 @@
 const express = require('express');
+// 2- BRING KNEX
+const knex = require('knex');
 const app = express();
 
 app.use(express.json());
@@ -7,6 +9,7 @@ app.get('/', (req, res, next) => {
   res.json('success!');
 });
 
+// 1-  ENDPOINT
 app.get('/users', (req, res) => {
   // pull all users from db
   // send users back to client
