@@ -7,6 +7,8 @@ app.get('/', (req, res, next) => {
   res.json('success!');
 });
 
+
+// this comes at the end of the pipeline
 app.use(function errorHandler(err, req, res, next) {
   console.error('ERROR:', err);
   res.status(500).json({
