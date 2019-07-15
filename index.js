@@ -3,6 +3,15 @@ const express = require('express');
 const knex = require('knex');
 const app = express();
 
+// 3- CREATE THE DB WRAPPER USING KNEX
+const db = knex({
+  client: 'sqlite3',
+  connection: {
+    filename: './db/database.db3',
+  },
+  useNullAsDefault: true,
+});
+
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
