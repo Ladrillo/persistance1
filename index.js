@@ -43,10 +43,14 @@ app.get('/users', async (req, res) => {
   res.json(users);
 });
 
-app.post('/users', async (req, res) => {
-  // improve so we return newly created record instead of an array of ids
-  const result = await createNewUser(req.body);
-  res.json(result);
+app.post('/users', async (req, res, next) => {
+  try {
+    const arrayOfIds = await createNewUser(req.body);
+    const arrayOfUsers = await getUserById(arrayOfIds[0]);
+    res.status(201).json(arrayOfUsers[0]);
+  } catch (error) {
+    next("Couldn't create user :(");
+  }
 });
 
 app.use(function errorHandler(err, req, res, next) {
