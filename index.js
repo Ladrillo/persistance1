@@ -13,7 +13,8 @@ const db = knex({
 });
 
 function getAllUsers() {
-
+  // SELECT * FROM USERS;
+  return db('users');
 }
 
 app.use(express.json());
@@ -27,6 +28,7 @@ app.get('/users', async (req, res) => {
   // pull all users from db
   const users = await getAllUsers();
   // send users back to client
+  res.json(users);
 });
 
 // this comes at the end of the pipeline
