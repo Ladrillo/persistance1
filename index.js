@@ -21,6 +21,7 @@ function getUserById(id) {
 }
 
 function createNewUser({ fname, lname }) {
+  // INSERT INTO users (fname, lname) VALUES (fname, lname);
   return db('users').insert({ fname, lname });
 }
 
