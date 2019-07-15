@@ -63,10 +63,19 @@ app.post('/users', async (req, res, next) => {
   }
 });
 
-app.put('/users/:id', async (req, res) => {
-  const { fname, lname } = req.body;
-  const result = await updateUserById(req.params.id, { fname, lname });
-  res.json(result);
+app.put('/users/:id', async (req, res, next) => {
+  // no status codes
+  // no try catch
+  // what if we are given an id which doens't exist
+  // what if req.body does not have what it needs (validation??????)
+  // etc
+  if (!req.body.fname || !req.body.lname) {
+    next(new Error('fname and lname are mandatory!!!'));
+  } else {
+    const { fname, lname } = req.body;
+    const result = await updateUserById(req.params.id, { fname, lname });
+    res.json(result);
+  }
 });
 
 app.use(function errorHandler(err, req, res, next) {
