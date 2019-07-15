@@ -7,6 +7,10 @@ app.get('/', (req, res, next) => {
   res.json('success!');
 });
 
+app.get('/users', (req, res) => {
+  // pull all users from db
+  // send users back to client
+});
 
 // this comes at the end of the pipeline
 app.use(function errorHandler(err, req, res, next) {
