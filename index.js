@@ -1,9 +1,7 @@
 const express = require('express');
-// 2- BRING KNEX
 const knex = require('knex');
 const app = express();
 
-// 3- CREATE THE DB WRAPPER USING KNEX
 const db = knex({
   client: 'sqlite3',
   connection: {
@@ -28,7 +26,11 @@ app.get('/', (req, res, next) => {
   res.json('success!');
 });
 
-// 1-  ENDPOINT
+app.get('/users/:id', async (req, res) => {
+  const result = await getUserById(req.params.id);
+  res.json(result);
+});
+
 app.get('/users', async (req, res) => {
   // pull all users from db
   const users = await getAllUsers();
@@ -36,7 +38,6 @@ app.get('/users', async (req, res) => {
   res.json(users);
 });
 
-// this comes at the end of the pipeline
 app.use(function errorHandler(err, req, res, next) {
   console.error('ERROR:', err);
   res.status(500).json({
