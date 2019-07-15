@@ -66,6 +66,7 @@ app.post('/users', async (req, res, next) => {
 app.put('/users/:id', async (req, res) => {
   const { fname, lname } = req.body;
   const result = await updateUserById(req.params.id, { fname, lname });
+  res.json(result);
 });
 
 app.use(function errorHandler(err, req, res, next) {
