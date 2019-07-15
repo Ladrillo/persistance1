@@ -30,6 +30,11 @@ function updateUserById(id, { fname, lname }) {
   return db('users').where({ id }).update({ fname, lname });
 }
 
+function deleteUserById(id) {
+  // DELETE FROM users WHERE id = id;
+  return db('users').where({ id }).del();
+}
+
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
