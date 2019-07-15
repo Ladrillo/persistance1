@@ -13,8 +13,13 @@ const db = knex({
 });
 
 function getAllUsers() {
-  // SELECT * FROM USERS;
+  // SELECT * FROM users;
   return db('users');
+}
+
+function getUserById(id) {
+  // SELECT * FROM users WHERE id = id;
+  return db('users').where({ id });
 }
 
 app.use(express.json());
