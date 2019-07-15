@@ -20,6 +20,10 @@ function getUserById(id) {
   return db('users').where({ id });
 }
 
+function createNewUser({ fname, lname }) {
+  return db('users').insert({ fname, lname });
+}
+
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
@@ -36,6 +40,11 @@ app.get('/users', async (req, res) => {
   const users = await getAllUsers();
   // send users back to client
   res.json(users);
+});
+
+app.post('/users', async (req, res) => {
+  const result = await createNewUser(req.body);
+  res.json(result);
 });
 
 app.use(function errorHandler(err, req, res, next) {
