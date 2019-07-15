@@ -25,6 +25,11 @@ function createNewUser({ fname, lname }) {
   return db('users').insert({ fname, lname });
 }
 
+function updateUserById(id, { fname, lname }) {
+  // UPDATE users SET fname="fname", lname="lname" WHERE id = id;
+  return db('users').where({ id }).update({ fname, lname });
+}
+
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
@@ -51,6 +56,11 @@ app.post('/users', async (req, res, next) => {
   } catch (error) {
     next(new Error("Couldn't create user :("));
   }
+});
+
+app.put('/users/:id', async (req, res) => {
+  const { fname, lname } = req.body;
+  const result = await updateUserById(req.params.id, { fname, lname });
 });
 
 app.use(function errorHandler(err, req, res, next) {
