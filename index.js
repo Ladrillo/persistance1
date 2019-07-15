@@ -27,8 +27,8 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/users/:id', async (req, res) => {
-  const result = await getUserById(req.params.id);
-  res.json(result);
+  const records = await getUserById(req.params.id);
+  res.json(records[0]);
 });
 
 app.get('/users', async (req, res) => {
