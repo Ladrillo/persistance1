@@ -49,7 +49,7 @@ app.post('/users', async (req, res, next) => {
     const arrayOfUsers = await getUserById(arrayOfIds[0]);
     res.status(201).json(arrayOfUsers[0]);
   } catch (error) {
-    next("Couldn't create user :(");
+    next(new Error("Couldn't create user :("));
   }
 });
 
